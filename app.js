@@ -246,10 +246,12 @@ checkoutBtn.addEventListener('click', ()=>{
       if(ev.target.value === 'card'){ cardForm.style.display = 'flex'; qrPanel.style.display = 'none'; }
       else {
         cardForm.style.display = 'none'; qrPanel.style.display = 'flex';
-        const qr = document.getElementById('qrImage');
-        qr.innerHTML = '';
-        new QRCode(qr, { text: window.location.origin + '/recibo.html', width:180, height:180 });
-        document.getElementById('qrTotal').textContent = '$' + total.toLocaleString();
+        new QRCode(qr, { 
+          text: "https://brokiiitriple3.github.io/Outfit-Generator/recibo.html",
+          width:180,
+          height:180
+        });
+        
       }
     };
   });

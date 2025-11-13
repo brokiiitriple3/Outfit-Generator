@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Outfit Generator — Tienda</title>
+  <link rel="stylesheet" href="styleTienda.css">
+</head>
+<body>
+  <!-- video de fondo -->
+  <video autoplay muted loop playsinline class="background-video" aria-hidden="true">
+    <source src="outfit pagina fondo loop.mp4" type="video/mp4">
+    Tu navegador no soporta video de fondo.
+  </video>
+
+  <!-- NAV / HERO -->
+  <header class="site-header">
+    <div class="topbar">
+      <nav class="nav">
+        <div class="logo">Outfit<span>Gen</span></div>
+        <ul class="nav-links" role="menubar" aria-label="Menú principal">
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Productos</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+        <div class="right-actions">
+          <button class="search-toggle" id="mobileSearchBtn" aria-label="Buscar">🔍</button>
+          <div class="cart-icon" id="cartIcon" aria-label="Abrir carrito">🛒</div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="hero">
+      <h1 class="hero-title">Outfit Generator</h1>
+      <p class="hero-sub">Tu estilo, tu historia — desde el barrio hasta la web 🖤</p>
+      <a href="#productos" class="hero-cta">Ver productos</a>
+    </div>
+  </header>
+
+  <!-- Panel deslizable del carrito -->
+  <aside id="cartPanel" class="cart-panel" aria-hidden="true">
+    <div class="cart-header">
+      <h2>Tu carrito <span id="cartBadgeSmall" class="badge" aria-hidden="true"></span></h2>
+      <div class="cart-actions">
+        <button id="clearCartBtn" class="btn small">Vaciar</button>
+        <span id="closeCart" class="close-cart" role="button" aria-label="Cerrar carrito">✕</span>
+      </div>
+    </div>
+
+    <div class="cart-content" id="cartContent" tabindex="0">
+      <p>Tu carrito está vacío.</p>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total">Total: <span id="cartTotal">$0</span></div>
+      <button id="checkoutBtn" class="checkout-btn">Finalizar compra</button>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="wrap" id="productos">
+    <!-- CATALOGO -->
+    <section class="catalog">
+      <div class="catalog-head">
+        <div class="left">
+          <h2>Productos</h2>
+          <p class="muted small">Colección urbana · edición 2025</p>
+        </div>
+
+        <div class="controls">
+          <input id="search" placeholder="Buscar..." aria-label="Buscar productos" />
+          <select id="filter" aria-label="Filtrar por categoría">
+            <option value="all">Todas las categorías</option>
+            <option value="gorra">Gorras</option>
+            <option value="remera">Remeras</option>
+            <option value="zapas">Zapatillas</option>
+            <option value="buzos">Buzos</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="products" id="products" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <!-- Modal producto -->
+  <div id="productModal" class="modal" aria-hidden="true">
+    <div class="box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="box-head">
+        <h3 id="modalTitle">Título</h3>
+        <button id="closeModal" class="btn">Cerrar</button>
+      </div>
+
+      <div class="row">
+        <img id="modalImg" src="" alt="producto">
+        <div class="box-body">
+          <p id="modalDesc">Descripción</p>
+          <p id="modalPrice" class="price">$0</p>
+
+          <div class="size-selector">
+            <label for="modalSize">Talle:</label>
+            <select id="modalSize" class="talle-select">
+              <option value="S">S</option>
+              <option value="M" selected>M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+          </div>
+
+          <div class="row" style="margin-top:10px; align-items:center;">
+            <input id="modalQty" type="number" min="1" value="1" class="qty-input" aria-label="Cantidad">
+            <button id="addToCartBtn" class="btn">Agregar al carrito</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="modal" aria-hidden="true">
+    <div class="box checkout-box">
+      <div class="box-head">
+        <h3>Pago — Total <span id="checkoutTotal">$0</span></h3>
+        <button id="closeCheckout" class="btn">Cerrar</button>
+      </div>
+
+      <div class="checkout-body">
+        <div class="methods">
+          <label><input type="radio" name="payMethod" value="card" checked> Tarjeta</label>
+          <label><input type="radio" name="payMethod" value="qr"> QR (MercadoPago)</label>
+        </div>
+
+        <form id="cardForm" class="card-form" autocomplete="off">
+          <div class="card-visual">
+            <div class="card-illustration">
+              <div class="chip" aria-hidden="true"></div>
+              <div id="cardNumberPreview">•••• •••• •••• ••••</div>
+              <div class="card-row">
+                <div id="cardNamePreview">NOMBRE APELLIDO</div>
+                <div id="cardExpPreview">MM/AA</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="inputs">
+            <input id="cardNumber" placeholder="Número de tarjeta" maxlength="19" inputmode="numeric" required>
+            <div class="row">
+              <input id="cardExp" placeholder="MM/AA" maxlength="5" required>
+              <input id="cardCvv" placeholder="CVV" maxlength="4" inputmode="numeric" required>
+            </div>
+            <input id="cardName" placeholder="Nombre en la tarjeta" required>
+          </div>
+        </form>
+
+        <div id="qrPanel" class="qr-panel" style="display:none;flex-direction:column;align-items:center;gap:10px;">
+          <p>Escaneá este código QR para ver tu recibo:</p>
+          <div id="qrImage" style="width:200px;height:200px;border:1px solid #ddd;border-radius:8px;"></div>
+          <p><strong>Total:</strong> <span id="qrTotal">$0</span></p>
+        </div>
+
+        <div class="checkout-actions">
+          <button id="payBtn" class="btn secondary">Pagar ahora</button>
+          <button id="payCancel" class="btn">Cancelar</button>
+        </div>
+
+        <div id="processing" class="processing" style="display:none">
+          <div class="spinner" role="status" aria-hidden="true"></div>
+          <p>Procesando pago...</p>
+        </div>
+
+        <div id="success" class="success" style="display:none">
+          <div class="check">✓</div>
+          <h4>Pago exitoso</h4>
+          <p>Gracias por tu compra — se ha generado el comprobante.</p>
+          <button id="successClose" class="btn">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <h2 class="footer-logo">Outfit<span>Gen</span></h2>
+        <p>Tu estilo, tu historia — desde el barrio hasta la web 🖤</p>
+      </div>
+
+      <div class="footer-center">
+        <h3>Enlaces</h3>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Productos</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-right">
+        <h3>Seguinos</h3>
+        <a href="https://www.instagram.com/brokeyprogamer777" target="_blank" rel="noopener">Instagram</a><br>
+        <a href="https://www.instagram.com/miqueascasilli" target="_blank" rel="noopener">Segundo Instagram</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Outfit Generator — Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <!-- librería QR + tu JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

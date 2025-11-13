@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Outfit Generator</title>
+  <link rel="stylesheet" href="stylePrincipal.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+  <!-- Video de fondo -->
+  <video autoplay muted loop playsinline class="background-video">
+    <source src="outfit pagina fondo loop.mp4" type="video/mp4">
+  </video>
+
+  <header>
+    <h1>Outfit Generator</h1>
+  </header>
+
+  <main>
+    <!-- Subida de prendas -->
+      <section class="upload-section">
+        <h2>Subí tus prendas</h2> 
+        <div class="upload-group"> 
+        <label>Sombrero/Gorra (opcional)</label> 
+
+        <button class="upload-btn" data-target="hatInput">Cargar</button> 
+        <input type="file" id="hatInput" accept="image/*"> 
+        <div id="hatList" class="item-list"></div> </div> 
+       <div class="upload-group"> 
+        
+        <label>Torso</label> 
+        <button class="upload-btn" data-target="torsoInput">Cargar</button> 
+        <input type="file" id="torsoInput" accept="image/*"> 
+        <div id="torsoList" class="item-list"></div> </div> 
+        <div class="upload-group"> 
+
+          <label>Piernas</label> 
+          <button class="upload-btn" data-target="pantsInput">Cargar</button> 
+          <input type="file" id="pantsInput" accept="image/*"> 
+          <div id="pantsList" class="item-list"></div> </div> 
+          <div class="upload-group"> 
+
+            <label>Zapatillas</label> 
+            <button class="upload-btn" data-target="shoesInput">Cargar</button> 
+            <input type="file" id="shoesInput" accept="image/*"> 
+            <div id="shoesList" class="item-list"></div> </div>
+    </section>
+
+    <!-- Generar outfit -->
+    <section class="outfit-section">
+      <h2>Tu outfit</h2>
+      <button id="generateBtn" class="btn">Generar Outfit Aleatorio</button>
+      <div id="outfitPreview" class="outfit-preview"></div>
+
+      <!-- Nuevo -->
+      <button id="saveBtn" class="btn">Guardar Outfit</button>
+      <button id="downloadBtn" class="btn">Descargar Outfit</button>
+      <p id="counter">Outfits generados: 0</p>
+    </section>
+
+    <!-- Historial -->
+    <section class="history-section">
+      <h2>Mis Outfits Guardados</h2>
+      <div id="savedOutfits" class="item-list"></div>
+    </section>
+
+
+    
+    <!-- Mapa -->
+    <section class="map-section">
+      <h2>Locales de ropa cercanos</h2>
+      <div id="map" style="height:400px; border-radius:10px; margin-top:10px;"></div>
+    </section>
+  </main>
+
+<!-- BOTÓN DE COMPARTIR -->
+<section class="share-section">
+  <button id="shareBtn" class="btn">Compartir Outfit en Twitter</button>
+</section>
+
+  <footer>
+    <p>© 2025 Outfit Generator — Todos los derechos reservados.</p>
+  </footer>
+
+
+  
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="scriptPrincipal.js"></script>
+ 
+
+<script>
+  // MAPA CON ICONO PERSONALIZADO
+  const map = L.map('map').setView([-34.5545, -58.7100], 15);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Icono principal
+  const principalIcon = L.icon({
+    iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png', // icono tienda
+    iconSize: [35, 35],
+    iconAnchor: [17, 35],
+    popupAnchor: [0, -35]
+  });
+
+  const principal = {
+    nombre: 'Tienda Principal',
+    coordenadas: [-34.5545, -58.7100],
+    descripcion: 'Tu tienda favorita en la zona de las 5 esquinas de Grand Bourg.'
+  };
+
+  L.marker(principal.coordenadas, {icon: principalIcon}).addTo(map)
+    .bindPopup(`<b>${principal.nombre}</b><br>${principal.descripcion}`)
+    .openPopup();
+
+  const tiendasCercanas = [
+    {nombre: 'Todomoda', coordenadas: [-34.5548, -58.7095], descripcion: 'Moda casual y urbana.'},
+    {nombre: 'Intimamente moda', coordenadas: [-34.5542, -58.7105], descripcion: 'Ropa femenina y accesorios.'},
+    {nombre: 'Dash', coordenadas: [-34.5540, -58.7098], descripcion: 'Zapatillas, ropa deportiva y más.'},
+    {nombre: 'Sergio dis', coordenadas: [-34.5547, -58.7103], descripcion: 'Ropa para jóvenes y adolescentes.'}
+  ];
+
+  tiendasCercanas.forEach(tienda => {
+    L.marker(tienda.coordenadas).addTo(map)
+      .bindPopup(`<b>${tienda.nombre}</b><br>${tienda.descripcion}`);
+  });
+
+  // BOTÓN DE COMPARTIR OUTFIT EN TWITTER
+  document.getElementById('shareBtn').addEventListener('click', () => {
+    if (document.getElementById('outfitPreview').innerHTML.trim() === "") {
+      alert("Primero genera un outfit para compartir.");
+      return;
+    }
+    const url = encodeURIComponent("https://tu-sitio.com");
+    const text = encodeURIComponent("Mirá mi outfit generado con Outfit Generator!");
+    window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, "_blank");
+  });
+</script>
+
+
+</body>
+</html>
+
+

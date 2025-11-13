@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Outfit Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Video de fondo -->
+  <video autoplay muted loop playsinline class="background-video">
+    <source src="outfit pagina fondo loop.mp4" type="video/mp4">
+    Tu navegador no soporta videos de fondo.
+  </video>
+
+  <!-- Hero con logo gigante -->
+  <section class="hero">
+    <h1 class="logo">Outfit Generator</h1>
+  </section>
+
+  <!-- Sección de botones -->
+  <section class="actions">
+    <button class="btn" id="loginBtn">Iniciar sesión</button>
+    <button class="btn" id="shopBtn">Tienda online</button>
+    <button class="btn" id="guestBtn">Acceder como invitado</button>
+  </section>
+
+  <!-- Modal de login -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content animate">
+      <span class="close">&times;</span>
+      <h2>Iniciar Sesión</h2>
+      <form id="loginForm">
+        <div class="input-group">
+          <input type="text" id="username" required>
+          <label>Usuario</label>
+        </div>
+        <div class="input-group">
+          <input type="password" id="password" required>
+          <label>Contraseña</label>
+        </div>
+        <button type="submit" class="btn">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Outfit Generator — Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Modal login
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.getElementById('loginModal');
+    const closeModalBtn = loginModal.querySelector('.close');
+
+    loginBtn.addEventListener('click', () => loginModal.style.display='flex');
+    closeModalBtn.addEventListener('click', () => loginModal.style.display='none');
+    window.addEventListener('click', e => { if(e.target==loginModal) loginModal.style.display='none'; });
+
+    // Scroll efecto fade-in para botones
+    const actionsSection = document.querySelector('.actions');
+    window.addEventListener('scroll', () => {
+      const top = actionsSection.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      if(top < windowHeight - 100) {
+        actionsSection.classList.add('visible');
+      }
+    });
+  </script>
+</body>
+</html>

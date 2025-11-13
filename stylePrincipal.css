@@ -1,0 +1,268 @@
+/* ============================= */
+/* ESTILOS PRINCIPAL EXTENDIDO   */
+/* ============================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Inter, system-ui, Arial, sans-serif;
+}
+
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.5) blur(4px);
+  transform: translate(-5%, -5%);
+}
+
+body {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  padding: 20px;
+  text-align: center;
+  background: rgba(0,0,0,0.7);
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* ============================= */
+/* SECCIONES GENERALES           */
+/* ============================= */
+.upload-section, .outfit-section, .history-section, .map-section {
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.upload-group {
+  margin-bottom: 15px;
+}
+
+.upload-btn {
+  padding: 8px 16px;
+  background: #ff6b6b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background 0.3s ease;
+}
+
+.upload-btn:hover {
+  background: #ff5252;
+}
+
+.item-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.item-list img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* ============================= */
+/* SECCIÓN OUTFIT                */
+/* ============================= */
+.outfit-section {
+  text-align: center;
+}
+
+.outfit-preview {
+  position: relative;
+  width: 200px;   /* tamaño del outfit */
+  height: 400px;
+  margin: 20px auto;
+  border: 2px dashed #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.3);
+}
+
+/* Todas las prendas posicionadas correctamente */
+.outfit-preview img {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  object-fit: contain; 
+  max-width: 100%;
+}
+
+/* Zonas específicas */
+.outfit-preview .hat {
+  top: 0;
+  max-height: 80px; /* altura proporcional al contenedor */
+}
+
+.outfit-preview .torso {
+  top: 80px;
+  max-height: 150px;
+}
+
+.outfit-preview .pants {
+  top: 230px;
+  max-height: 100px;
+}
+
+.outfit-preview .shoes {
+  top: 330px;
+  max-height: 70px;
+}
+
+/* ============================= */
+/* HISTORIAL DE OUTFITS          */
+/* ============================= */
+.history-section {
+  max-width: 800px;
+}
+
+#savedOutfits {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+#savedOutfits > div {
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Las miniaturas guardadas */
+#savedOutfits .outfit-preview {
+  width: 100px !important;
+  height: 200px !important;
+  border: 1px solid #fff;
+  margin: 0;
+  background: rgba(0,0,0,0.4);
+  border-radius: 8px;
+}
+
+/* Contenedor donde se guardan los outfits */
+.saved-outfit {
+  display: flex;
+  flex-direction: column; /* prendas una debajo de la otra */
+  align-items: center;
+  justify-content: flex-start;
+  width: 100px;
+  height: 200px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  margin: 5px;
+  background: rgba(0,0,0,0.6);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Ajustamos las imágenes dentro de cada outfit guardado */
+.saved-outfit img {
+  max-width: 80%;
+  height: auto;
+  margin: 2px 0;
+  object-fit: contain;
+}
+
+
+/* ============================= */
+/* MAPA                          */
+/* ============================= */
+.map-section {
+  max-width: 800px;
+}
+
+#map {
+  height: 400px;
+  border-radius: 12px;
+  margin-top: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* ============================= */
+/* BOTONES                       */
+/* ============================= */
+.btn {
+  background: #111;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4),
+              0 2px 4px rgba(0, 0, 0, 0.3) inset;
+  margin: 5px;
+}
+
+.btn:hover {
+  background: #757474;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5),
+              0 2px 4px rgba(255, 255, 255, 0.2) inset;
+}
+
+/* ============================= */
+/* FOOTER                        */
+/* ============================= */
+footer {
+  text-align: center;
+  padding: 14px;
+  font-size: 14px;
+  color: #eeebeb;
+  background: rgba(0,0,0,0.7);
+}
+
+/* Efecto glass en secciones */
+.upload-section, .outfit-section, .history-section, .map-section, .share-section {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+/* Hover en prendas */
+.outfit-preview img {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.outfit-preview img:hover {
+  transform: translateX(-50%) scale(1.08);
+  filter: brightness(1.2);
+}
+
+/* Botón compartir */
+.share-section {
+  text-align: center;
+  margin: 10px auto 30px auto;
+}
+
+
+
+
+

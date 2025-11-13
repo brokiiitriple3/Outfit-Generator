@@ -1,0 +1,141 @@
+/* ==== Tipografía Dirty War ==== */
+@font-face {
+  font-family: 'DirtyWar';
+  src: url('Dirty\ War.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ==== Reset y body ==== */
+* {margin:0; padding:0; box-sizing:border-box;}
+body, html {
+  width:100%; height:100%;
+  font-family: 'Poppins', sans-serif; /* Fuente por defecto */
+  scroll-behavior: smooth;
+}
+
+/* ==== Video de fondo ==== */
+.background-video {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  z-index:-1;
+}
+body::after {
+  content:'';
+  position:fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.4);
+  z-index:0;
+}
+
+/* ==== Hero (logo gigante en texto) ==== */
+.hero {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  z-index:1;
+  position:relative;
+}
+.hero .logo {
+  font-family: 'DirtyWar', sans-serif; /* Aplico la fuente */
+  font-size: 6rem;
+  color: #fff;
+  text-align:center;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+  animation: fadeIn 2s ease forwards;
+  opacity:0;
+  animation-delay: 0.5s;
+}
+
+/* ==== Sección de botones ==== */
+.actions {
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  gap:20px;
+  padding:100px 20px;
+  z-index:1;
+  position:relative;
+  opacity:0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+.actions.visible {
+  opacity:1;
+  transform: translateY(0);
+}
+.btn {
+  background: #111;
+  color: #fff;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+.btn:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+
+/* ==== Modal ==== */
+.modal {
+  display:none;
+  position: fixed;
+  z-index: 10;
+  left:0; top:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.7);
+  justify-content:center;
+  align-items:center;
+}
+.modal-content {
+  background:#fff;
+  border-radius:20px;
+  padding:40px 30px;
+  max-width:400px;
+  width:90%;
+  position:relative;
+  animation: slideDown 0.5s ease;
+}
+.modal-content h2 { margin-bottom:20px; text-align:center; }
+.input-group { position:relative; margin-bottom:20px; }
+.input-group input {
+  width:100%;
+  padding:12px 10px;
+  border:2px solid #ccc;
+  border-radius:10px;
+  outline:none;
+  font-size:1rem;
+  transition: 0.2s;
+}
+.input-group input:focus { border-color:#111; }
+.input-group label {
+  position:absolute;
+  top:-8px;
+  left:12px;
+  background:#fff;
+  padding:0 5px;
+  font-size:0.8rem;
+  color:#111;
+}
+.close { position:absolute; top:15px; right:20px; font-size:1.5rem; cursor:pointer; }
+
+/* ==== Footer ==== */
+footer {
+  position: relative;
+  z-index:1;
+  text-align: center;
+  color: #fff;
+  margin-top: 50px;
+  font-size:0.9rem;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* ==== Animaciones ==== */
+@keyframes fadeIn { 0%{opacity:0;} 100%{opacity:1;} }
+@keyframes slideDown { 0%{opacity:0; transform:translateY(-50px);} 100%{opacity:1; transform:translateY(0);} }

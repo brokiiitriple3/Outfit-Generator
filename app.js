@@ -246,12 +246,12 @@ checkoutBtn.addEventListener('click', ()=>{
       if(ev.target.value === 'card'){ cardForm.style.display = 'flex'; qrPanel.style.display = 'none'; }
       else {
         cardForm.style.display = 'none'; qrPanel.style.display = 'flex';
-        new QRCode(qr, { 
-          text: "https://brokiiitriple3.github.io/Outfit-Generator/recibo.html",
-          width:180,
-          height:180
-        });
-        
+        const qr = document.getElementById('qrImage');
+qr.innerHTML = `
+  <img src="qr-code.png" 
+       style="width:180px;height:180px;border-radius:8px;" 
+       alt="QR de pago">
+          `;
       }
     };
   });
